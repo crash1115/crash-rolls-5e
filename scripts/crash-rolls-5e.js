@@ -174,7 +174,15 @@ Hooks.on('dnd5e.useItem', async (item) => {
         }
 
         if (autoRollDamage && item.hasDamage) {
-            item.rollDamage({critical: crit});
+
+            if (game.modules.get('rollgroups')?.active && item.getFlag('rollgroups', 'config')?.groups?.length) {
+                item.rollDamageGroup?.({
+                    rollgroup: 0,
+                    critical: crit,
+                });
+            } else {
+                item.rollDamage({critical: crit});
+            }
         }
     }
 
