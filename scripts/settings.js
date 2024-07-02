@@ -63,4 +63,13 @@ export function registerSettings() {
         type: Boolean,
         config: true
     });
+
+    game.settings.register(MODULE_ID, 'useBRShortcutKeys', {
+        name: "Hold Shift for Advantage",
+        hint: "Shift = Adv. Ctrl = Disadv. Alt = Fast Forward.",
+        scope: 'client',
+        default: false,
+        type: Boolean,
+        config: true
+    });
 }

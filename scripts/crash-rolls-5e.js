@@ -181,6 +181,9 @@ Hooks.on('dnd5e.useItem', async (item) => {
 });
 
 function useAdvantage(ev){
+    if(getSettingValue("useBRShortcutKeys")){
+        return ev.shiftKey;
+    }
     return ev.altKey;
 }
 
@@ -189,5 +192,8 @@ function useDisadvantage(ev){
 }
 
 function useFastForward(ev){
+    if(getSettingValue("useBRShortcutKeys")){
+        return ev.altKey;
+    }
     return ev.shiftKey;
 }

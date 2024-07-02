@@ -7,9 +7,9 @@
       "name": "CRASH1115"
     }
   ],
-  "version": "0.1.0",
+  "version": "0.1.1",
   "manifest": "https://github.com/crash1115/crash-rolls-5e/releases/latest/download/module.json",
-  "download": "https://github.com/crash1115/crash-rolls-5e/releases/download/v0.1.0/crash-rolls-5e.zip",
+  "download": "https://github.com/crash1115/crash-rolls-5e/releases/download/v0.1.1/crash-rolls-5e.zip",
   "compatibility": {
     "minimum": 12,
     "verified": 12

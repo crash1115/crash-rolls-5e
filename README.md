@@ -1,3 +1,16 @@
+## What is this?
+A module for Foundry VTT that gives you more fine control over what the roll flow looks like, without the need for a huge complex module that messes with a ton of things. Each user has the ability to set the following toggles for themselves:
+- Automatically roll items
+- Automatically roll damage
+- Skip item dialogs
+- Skip damage dialogs
+- Skip abilitiy check dialogs
+- Skip save dialogs
+- Skip skill check dialogs
+- Use Better Rolls / Ready Set Roll style Shift for Advantage and Alt for fast forwarding rolls.
 
+## Known Issues
+- Enabling RSR-Style Shortcut Keys does not fast-forward rolls when Alt is held (it rolls at advantage instead). Shift and Ctrl roll advantage and disadvantage as expected.
 
-Credits: This module is derived in part from [Faster Rolling by Default DnD5e](https://github.com/ElfFriend-DnD/foundryvtt-faster-rolling-by-default-5e).
+## Credits
+- This module is derived in part from [Faster Rolling by Default DnD5e](https://github.com/ElfFriend-DnD/foundryvtt-faster-rolling-by-default-5e).
