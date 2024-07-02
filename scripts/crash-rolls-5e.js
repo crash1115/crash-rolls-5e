@@ -110,7 +110,7 @@ Hooks.on('dnd5e.preRollDamage', (document, config) => {
     if(config.fastForward === true || config.fastForward === false){
         return;
     }
-    const critical = useAdvantage(window.event);
+    const critical = config.critical || useAdvantage(window.event);
     const fastForward = getSettingValue("skipDamageDialogs") ||useFastForward(window.event) || critical;
 
     config.fastForward = fastForward;
