@@ -7,9 +7,9 @@
       "name": "CRASH1115"
     }
   ],
-  "version": "0.1.3",
+  "version": "0.2.0",
   "manifest": "https://github.com/crash1115/crash-rolls-5e/releases/latest/download/module.json",
-  "download": "https://github.com/crash1115/crash-rolls-5e/releases/download/v0.1.3/crash-rolls-5e.zip",
+  "download": "https://github.com/crash1115/crash-rolls-5e/releases/download/v0.2.0/crash-rolls-5e.zip",
   "compatibility": {
     "minimum": 12,
     "verified": 12
@@ -20,8 +20,7 @@
       "type": "system",
       "manifest": "https://raw.githubusercontent.com/foundryvtt/dnd5e/main/system.json",
       "compatibility": {
-        "minimum": "3.2.1",
-        "verified": "3.2.1"
+        "minimum": "4.0.0"
       }
     }]
   },

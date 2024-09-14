@@ -5,203 +5,158 @@ Hooks.on('init', () => {
     registerSettings();
 })
 
-// A place to store relevant event data; it's a PointerEvent in PreUseItem,
-//  and we need it carried through to UseItem, so we store it here then
-//  nuke it in UseItem.
-let STORED_EVENT = {
-    altKey: false,
-    shiftKey: false,
-    ctrlKey: false
-};
+
+// ============ FAST FORWARD ROLLS ============
 
 // ABILITY CHECKS
-Hooks.on('dnd5e.preRollAbilityTest', (document, config) => {
-    if(config.vanilla){ return; }
-    if(config.fastForward === true || config.fastForward === false){
-        return;
-    }
-    const advantage = useAdvantage(window.event);
-    const disadvantage = useDisadvantage(window.event);
-    const fastForward = getSettingValue("skipAbilityDialogs") || useFastForward(window.event) || advantage || disadvantage;
-
-    config.fastForward = fastForward;
-    config.advantage = advantage;
-    config.disadvantage = disadvantage;
+Hooks.on('dnd5e.preRollAbilityTest', (actor, rollData, abilityId) => {
+    if(rollData.vanilla){ return; }
+    const event = window.event;
+    const skipDialog = getSettingValue("skipAbilityDialogs");
+    const altRoll = useAltRoll(event, skipDialog);
+    const fastForward = skipDialog != altRoll;
+    rollData.fastForward  = fastForward;
 });
 
 // SAVING THROWS
-Hooks.on('dnd5e.preRollAbilitySave', (document, config) => {
-    if(config.vanilla){ return; }
-    if(config.fastForward === true || config.fastForward === false){
-        return;
-    }
-    const advantage = useAdvantage(window.event);
-    const disadvantage = useDisadvantage(window.event);
-    const fastForward = getSettingValue("skipSaveDialogs") || useFastForward(window.event) || advantage || disadvantage;
-
-    config.fastForward = fastForward;
-    config.advantage = advantage;
-    config.disadvantage = disadvantage;
+Hooks.on('dnd5e.preRollAbilitySave', (actor, rollData, abilityId) => {
+    if(rollData.vanilla){ return; }
+    const event = window.event;
+    const skipDialog = getSettingValue("skipSaveDialogs");
+    const altRoll = useAltRoll(event, skipDialog);
+    const fastForward = skipDialog != altRoll;
+    rollData.fastForward  = fastForward;
 });
 
 // DEATH SAVES
-Hooks.on('dnd5e.preRollDeathSave', (document, config) => {
-    if(config.vanilla){ return; }
-    if(config.fastForward === true || config.fastForward === false){
-        return;
-    }
-    const advantage = useAdvantage(window.event);
-    const disadvantage = useDisadvantage(window.event);
-    const fastForward = getSettingValue("skipSaveDialogs") ||useFastForward(window.event) || advantage || disadvantage;
-
-    config.fastForward = fastForward;
-    config.advantage = advantage;
-    config.disadvantage = disadvantage;
+Hooks.on('dnd5e.preRollDeathSave', (actor, rollData) => {
+    if(rollData.vanilla){ return; }
+    const event = window.event;
+    const skipDialog = getSettingValue("skipSaveDialogs");
+    const altRoll = useAltRoll(event, skipDialog);
+    const fastForward = skipDialog != altRoll;
+    rollData.fastForward  = fastForward;
 });
 
 // SKILL CHECKS
-Hooks.on('dnd5e.preRollSkill', (document, config) => {
-    if(config.vanilla){ return; }
-    if(config.fastForward === true || config.fastForward === false){
-        return;
-    }
-    const advantage = useAdvantage(window.event);
-    const disadvantage = useDisadvantage(window.event);
-    const fastForward = getSettingValue("skipSkillDialogs") ||useFastForward(window.event) || advantage || disadvantage;
-
-    config.fastForward = fastForward;
-    config.advantage = advantage;
-    config.disadvantage = disadvantage;
-});
-
-// ATTACKS
-Hooks.on('dnd5e.preRollAttack', (document, config) => {
-    if(config.vanilla){ return; }
-    if(config.fastForward === true || config.fastForward === false){
-        return;
-    }
-    const advantage = useAdvantage(window.event);
-    const disadvantage = useDisadvantage(window.event);
-    const fastForward = getSettingValue("skipItemDialogs") || useFastForward(window.event) || advantage || disadvantage;
-
-    config.fastForward = fastForward;
-    config.advantage = advantage;
-    config.disadvantage = disadvantage;
+Hooks.on('dnd5e.preRollSkill', (actor, rollData, skillId) => {
+    if(rollData.vanilla){ return; }
+    const event = window.event;
+    const skipDialog = getSettingValue("skipSkillDialogs");
+    const altRoll = useAltRoll(event, skipDialog);
+    const fastForward = skipDialog != altRoll;
+    rollData.fastForward  = fastForward;
 });
 
 // TOOLS
-Hooks.on('dnd5e.preRollToolCheck', (document, config) => {
-    if(config.vanilla){ return; }
-    if(config.fastForward === true || config.fastForward === false){
-        return;
-    }
-    const advantage = useAdvantage(window.event);
-    const disadvantage = useDisadvantage(window.event);
-    const fastForward = getSettingValue("skipItemDialogs") ||useFastForward(window.event) || advantage || disadvantage;
+Hooks.on('dnd5e.preRollToolCheck', (actor, rollData, toolId) => {
+    if(rollData.vanilla){ return; }
+    const event = window.event;
+    const skipDialog = getSettingValue("skipToolDialogs");
+    const altRoll = useAltRoll(event, skipDialog);
+    const fastForward = skipDialog != altRoll;
+    rollData.fastForward  = fastForward;
+});
 
-    config.fastForward = fastForward;
-    config.advantage = advantage;
-    config.disadvantage = disadvantage;
+
+// ============ FAST FORWARD ACTIVITIES ============
+
+
+// ATTACKS
+Hooks.on('dnd5e.preRollAttackV2', (rollConfig, dialogConfig, messageConfig) =>{    
+    const event = rollConfig.event;
+    const skipDialog = getSettingValue("skipAttackDialogs");
+    const altRoll = useAltRoll(event, skipDialog);
+    const fastForward = skipDialog != altRoll;
+    dialogConfig.configure = !fastForward;
 });
 
 // DAMAGE
-Hooks.on('dnd5e.preRollDamage', (document, config) => {
-    if(config.vanilla){ return; }
-    if(config.fastForward === true || config.fastForward === false){
-        return;
+Hooks.on('dnd5e.preRollDamageV2', (rollConfig, dialogConfig, messageConfig) => {
+    const event = rollConfig.event;
+    const skipDialog = getSettingValue("skipDamageDialogs");
+    const altRoll = useAltRoll(event, skipDialog);
+    const fastForward = skipDialog != altRoll;
+    dialogConfig.configure = !fastForward;
+});
+
+
+// ============ HANDLE ITEM USAGE ============
+
+Hooks.on('dnd5e.postUseActivity', async (activity, usageConfig, results) => {
+    if(!activity) return;
+    const lookup = {
+        'attack': {settingName: 'autoRollAttacks', functionName: 'rollAttack'},
+        'check':{},
+        'damage':{},
+        'enchant': {},
+        'heal': {settingName: 'autoRollDamage', functionName: 'rollDamage'},
+        'save' :{},
+        'summon': {},
+        'utility':{settingName: 'autoRollUtility', functionName: 'rollFormula'}
+    };
+
+    // Auto roll attacks/checks/etc
+    const settingName = lookup[activity.type]?.settingName;
+    if(settingName){
+        const autoRollItem = getSettingValue(settingName);
+        if(autoRollItem){
+            const functionName = lookup[activity.type]?.functionName;
+            if(functionName){
+                await activity[functionName]();
+            } 
+        }
     }
-    const critical = config.critical || useAdvantage(window.event);
-    const fastForward = getSettingValue("skipDamageDialogs") ||useFastForward(window.event) || critical;
+        
+    // Auto roll damage
+    if(activity.type==="attack"){
+        const autoRollDamage = getSettingValue('autoRollDamageForAttacks');
+        if((activity.damage) && autoRollDamage){
+            await activity.rollDamage();
+        }
+    } else {
+        const autoRollDamage = getSettingValue('autoRollDamage');
+        if((activity.damage) && autoRollDamage){
+            await activity.rollDamage();
+        }
+    }
 
-    config.fastForward = fastForward;
-    config.critical = critical;
-});
-
-// ITEMS
-Hooks.on('dnd5e.preUseItem', async () => {
-    const ev = window.event;
-    STORED_EVENT = {
-        altKey: ev.altKey,
-        shiftKey: ev.shiftKey,
-        ctrlKey: ev.ctrlKey
-    };
-});
-
-Hooks.on('dnd5e.useItem', async (item) => {
-    const ev = foundry.utils.deepClone(STORED_EVENT);
-    STORED_EVENT = {
-        altKey: false,
-        shiftKey: false,
-        ctrlKey: false,
-    };
-    const advantage = useAdvantage(ev);
-    const disadvantage = useDisadvantage(ev);
-    const fastForward = getSettingValue("skipItemDialogs") || useFastForward(ev) || advantage || disadvantage;
-
-    const autoRollItem = getSettingValue("autoRollItem");
-    const autoRollDamage = getSettingValue("autoRollDamage");
     
-    if (!autoRollItem && !autoRollDamage) {
-        return;
-    }
-
-    let crit = false;
-
-    // Roll the item if needed
-    if(autoRollItem){
-        if (item.type === 'tool') {
-            return item.rollToolCheck({
-                advantage: advantage,
-                disadvantage: disadvantage,
-                fastForward: fastForward
-            });
-        }
-
-        if (item.hasAttack) {
-            const result = await item.rollAttack({
-                advantage: advantage,
-                disadvantage: disadvantage,
-                fastForward: fastForward
-            });
-  
-            if (!result) {
-                return;
-            }
-  
-            if (result.isCritical) {
-                crit = true;
-            }
-        }
-
-        if (autoRollDamage && item.hasDamage) {
-
-            if (game.modules.get('rollgroups')?.active && item.getFlag('rollgroups', 'config')?.groups?.length) {
-                item.rollDamageGroup?.({
-                    rollgroup: 0,
-                    critical: crit,
-                });
-            } else {
-                item.rollDamage({critical: crit});
-            }
-        }
-    }
 
 });
 
-function useAdvantage(ev){
-    if(getSettingValue("useBRShortcutKeys")){
-        return ev.shiftKey;
+// Adapted from from dnd5e d20-roll.mjs, version 4.0
+function useAltRoll(ev, skipDialog = false){
+    // We alt roll when...
+    //  Adv/Disadv/FF Key is held and Skip Attack Dialogs is off, or
+    //  FF Key is not held and Skip Attack Dialogs is on.
+    let keys = {};
+    if(skipDialog){
+        keys = { normal: areKeysPressed(ev, "skipDialogNormal") };
+    } else {
+        keys = {
+            normal: areKeysPressed(ev, "skipDialogNormal"),
+            advantage: areKeysPressed(ev, "skipDialogAdvantage"),
+            disadvantage: areKeysPressed(ev, "skipDialogDisadvantage")
+        };
     }
-    return ev.altKey;
+    return Object.values(keys).some(k => k);
 }
 
-function useDisadvantage(ev){
-    return ev.ctrlKey;
-}
-
-function useFastForward(ev){
-    if(getSettingValue("useBRShortcutKeys")){
-        return ev.altKey;
-    }
-    return ev.shiftKey;
-}
+// Taken from dnd5e utils.mjs, version 4.0
+function areKeysPressed(event, action) {
+    if ( !event ) return false;
+    const activeModifiers = {};
+    const addModifiers = (key, pressed) => {
+      activeModifiers[key] = pressed;
+      KeyboardManager.MODIFIER_CODES[key].forEach(n => activeModifiers[n] = pressed);
+    };
+    addModifiers(KeyboardManager.MODIFIER_KEYS.CONTROL, event.ctrlKey || event.metaKey);
+    addModifiers(KeyboardManager.MODIFIER_KEYS.SHIFT, event.shiftKey);
+    addModifiers(KeyboardManager.MODIFIER_KEYS.ALT, event.altKey);
+    return game.keybindings.get("dnd5e", action).some(b => {
+      if ( game.keyboard.downKeys.has(b.key) && b.modifiers.every(m => activeModifiers[m]) ) return true;
+      if ( b.modifiers.length ) return false;
+      return activeModifiers[b.key];
+    });
+  }
