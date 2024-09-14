@@ -11,9 +11,6 @@ A module for Foundry VTT that gives you more fine control over what the roll flo
 - Skip skill check dialogs
 - Skip tool check dialogs
 
-## Known Issues
-- Enabling RSR-Style Shortcut Keys does not fast-forward rolls when Alt is held (it rolls at advantage instead). Shift and Ctrl roll advantage and disadvantage as expected.
-
 ## Credits
 - This module is derived in part from the [Faster Rolling by Default DnD5e](https://github.com/ElfFriend-DnD/foundryvtt-faster-rolling-by-default-5e) module.
 - This module re-uses some code from the [dnd5e](https://github.com/foundryvtt/dnd5e) system.
