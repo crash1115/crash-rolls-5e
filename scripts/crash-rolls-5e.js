@@ -8,6 +8,7 @@ Hooks.on('init', () => {
 
 // ============ FAST FORWARD ROLLS ============
 
+
 // ABILITY CHECKS
 Hooks.on('dnd5e.preRollAbilityTest', (actor, rollData, abilityId) => {
     if(rollData.vanilla){ return; }
@@ -48,7 +49,7 @@ Hooks.on('dnd5e.preRollSkill', (actor, rollData, skillId) => {
     rollData.fastForward  = fastForward;
 });
 
-// TOOLS
+// TOOL CHECKS
 Hooks.on('dnd5e.preRollToolCheck', (actor, rollData, toolId) => {
     if(rollData.vanilla){ return; }
     const event = window.event;
@@ -58,11 +59,7 @@ Hooks.on('dnd5e.preRollToolCheck', (actor, rollData, toolId) => {
     rollData.fastForward  = fastForward;
 });
 
-
-// ============ FAST FORWARD ACTIVITIES ============
-
-
-// ATTACKS
+// ATTACK ROLLS
 Hooks.on('dnd5e.preRollAttackV2', (rollConfig, dialogConfig, messageConfig) =>{    
     const event = rollConfig.event;
     const skipDialog = getSettingValue("skipAttackDialogs");
@@ -71,7 +68,7 @@ Hooks.on('dnd5e.preRollAttackV2', (rollConfig, dialogConfig, messageConfig) =>{
     dialogConfig.configure = !fastForward;
 });
 
-// DAMAGE
+// DAMAGE ROLLS
 Hooks.on('dnd5e.preRollDamageV2', (rollConfig, dialogConfig, messageConfig) => {
     const event = rollConfig.event;
     const skipDialog = getSettingValue("skipDamageDialogs");
@@ -81,9 +78,19 @@ Hooks.on('dnd5e.preRollDamageV2', (rollConfig, dialogConfig, messageConfig) => {
 });
 
 
-// ============ HANDLE ITEM USAGE ============
+// ============ HANDLE AUTOMATIC ROLLS ============
 
-Hooks.on('dnd5e.postUseActivity', async (activity, usageConfig, results) => {
+
+// ATTACKS
+Hooks.on('dnd5e.rollAttackV2', async (rollConfig, dialogConfig, messageConfig) =>{    
+    const autoRollDamage = getSettingValue('autoRollDamageForAttacks');
+    if((dialogConfig.subject.damage) && autoRollDamage){
+        await dialogConfig.subject.rollDamage();
+    }
+});
+
+// ACTIVITY FOLLOW-UPS
+Hooks.on('dnd5e.postUseActivity', async (activity, messageConfig, results) => {
     if(!activity) return;
     const lookup = {
         'attack': {settingName: 'autoRollAttacks', functionName: 'rollAttack'},
@@ -108,21 +115,13 @@ Hooks.on('dnd5e.postUseActivity', async (activity, usageConfig, results) => {
         }
     }
         
-    // Auto roll damage
-    if(activity.type==="attack"){
-        const autoRollDamage = getSettingValue('autoRollDamageForAttacks');
-        if((activity.damage) && autoRollDamage){
-            await activity.rollDamage();
-        }
-    } else {
+    // Auto roll non-attack damage
+    if(activity.type !="attack"){
         const autoRollDamage = getSettingValue('autoRollDamage');
         if((activity.damage) && autoRollDamage){
             await activity.rollDamage();
         }
     }
-
-    
-
 });
 
 // Adapted from from dnd5e d20-roll.mjs, version 4.0
@@ -159,4 +158,4 @@ function areKeysPressed(event, action) {
       if ( b.modifiers.length ) return false;
       return activeModifiers[b.key];
     });
-  }
+}

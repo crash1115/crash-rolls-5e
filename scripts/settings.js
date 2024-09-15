@@ -1,6 +1,7 @@
 export const MODULE_ID = 'crash-rolls-5e';
 
 export function registerSettings() {
+
     game.settings.register(MODULE_ID, 'autoRollAttacks', {
         name: "Auto Roll Attacks",
         hint: "Automatically make attack rolls when attack-type actions are used.",
