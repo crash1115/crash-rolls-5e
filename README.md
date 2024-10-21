@@ -5,6 +5,9 @@ A module for Foundry VTT that gives you more fine control over what the roll flo
 - Built for dnd5e v4.x
 - This module makes an attempt to be as non-disruptive as possible, but it has not been tested with other modules for compatibility
 
+# Installation
+- Manifest URL: `https://github.com/crash1115/crash-rolls-5e/releases/latest/download/module.json`
+
 # Automatic Roll Settings
 Automatically roll specific types of rolls based on user preference. Auto rolls respect user preference for skipping or not skipping the appropriate roll dialogs (see next section for more info). All examples listed assume the items are using their default setups from the SRD compendium.
 
