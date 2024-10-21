@@ -23,9 +23,9 @@ Automatically roll specific types of rolls based on user preference. Auto rolls 
 - When this is enabled, any damage or healing from activities that don't have the Attack type will roll automatically on use.
 - Ex: Sneak Attack, Fireball, Potion of Healing, Cure Wounds
 
-### Auto Roll OTher Formulae
+### Auto Roll Other Formulae
 - When this is enabled, any rolls from Utility type activities will roll automatically on use.
-- Ex:
+- Ex: ??? I actually have no idea what might be set up as Utility with a roll by default. Still looking, lol.
 
 # Skip Dialog Settings
 Skip or show dialogs for specific types of rolls. These settings can be overriden on a roll by roll basis if you have hotkeys set up through the system's Configure Controls menu:
