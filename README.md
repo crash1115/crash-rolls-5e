@@ -34,19 +34,19 @@ Skip or show dialogs for specific types of rolls. These settings can be override
 - Holding `Skip Dialog` will skip the dialog when the below settings are off, and show it when the below settings are on (basically just inverts the set behavior)
 
 ### Skip Attack Dialogs
-- Skips the advantage/disadvantage/bonus dialog when rolling attacks.
+- Skips the advantage/disadvantage/bonus dialog when rolling attacks, either from an item or buttons in chat cards.
 - Ex: Longsword, Eldritch Blast, Scorching Ray
 
 ### Skip Damage Dialogs
-- Skips the damage configuration dialog when rolling damage.
+- Skips the damage configuration dialog when rolling damage, either from an item or buttons in chat cards.
 - Ex: Longsword, Sneak Attack, Fireball
 
 ### Skip Ability Check Dialogs
-- Skips the advantage/disadvantage dialog when making skill checks, either from a character sheet or buttons in chat cards.
+- Skips the advantage/disadvantage dialog when making ability checks, either from a character sheet or buttons in chat cards.
 - Ex: Intelligence Check 
  
 ### Skip Saving Throw Dialogs
-- Skips the advantage/disadvantage dialog when making skill checks, either from a character sheet or buttons in chat cards.
+- Skips the advantage/disadvantage dialog when making saves or death saves, either from a character sheet or buttons in chat cards.
 - Ex: Dexterity Saving Throw, Death Saving Throw
 
 ### Skip Skill Check Dialogs
