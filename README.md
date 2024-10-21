@@ -2,7 +2,8 @@
 A module for Foundry VTT that gives you more fine control over what the roll flow looks like, without the need for a huge complex module that messes with a ton of things. Each user has the ability to adjust the settings for themselves.
 
 # Compatibility
-This module makes an attempt to be as non-disruptive as possible, but it has not been tested with other modules for compatibility.
+- Built for dnd5e v4.x
+- This module makes an attempt to be as non-disruptive as possible, but it has not been tested with other modules for compatibility
 
 # Automatic Roll Settings
 Automatically roll specific types of rolls based on user preference. Auto rolls respect user preference for skipping or not skipping the appropriate roll dialogs (see next section for more info). All examples listed assume the items are using their default setups from the SRD compendium.
@@ -49,7 +50,7 @@ Skip or show dialogs for specific types of rolls. These settings can be override
 - Skips the advantage/disadvantage dialog when making skill checks, either from a character sheet or buttons in chat cards.
 - Ex: Athletics Check
 
-### Skip Tool CHeck Dialogs
+### Skip Tool Check Dialogs
 - Skips the advantage/disadvantage/ability score dialog when using tools. This applies when rolling the tool from the Details page of the character sheet, or clicking the buttons in chat chards, but not clicking on tool items in the inventory.
 - Land Vehicles, Lute
 
