@@ -40,6 +40,7 @@ Skip or show dialogs for specific types of rolls. These settings can be override
 ### Skip Damage Dialogs
 - Skips the damage configuration dialog when rolling damage, either from an item or buttons in chat cards.
 - Ex: Longsword, Sneak Attack, Fireball
+- KNOWN ISSUE: Right now crits are not accounted for unless the user is holding the hotkey to force the crit.
 
 ### Skip Ability Check Dialogs
 - Skips the advantage/disadvantage dialog when making ability checks, either from a character sheet or buttons in chat cards.
