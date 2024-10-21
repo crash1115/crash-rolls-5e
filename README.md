@@ -31,7 +31,7 @@ Automatically roll specific types of rolls based on user preference. Auto rolls 
 Skip or show dialogs for specific types of rolls. These settings can be overriden on a roll by roll basis if you have hotkeys set up through the system's Configure Controls menu:
 - Holding `Skip Dialog (roll with Advantage/Critical)` will always skip the dialog and roll appropriately
 - Holding `Skip Dialog (roll with Disdvantage)` will always skip the dialog and roll appropriately
-- Holding `Skip Dialog` will skip the dialog when the below settings are off, and show it when the below settings are on
+- Holding `Skip Dialog` will skip the dialog when the below settings are off, and show it when the below settings are on (basically just inverts the set behavior)
 
 ### Skip Attack Dialogs
 - Skips the advantage/disadvantage/bonus dialog when rolling attacks.
