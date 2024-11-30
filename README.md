@@ -4,7 +4,8 @@
 A module for Foundry VTT that gives you more fine control over what the roll flow looks like, without the need for a huge complex module that messes with a ton of things. Each user has the ability to adjust the settings for themselves.
 
 # Compatibility
-- Built for dnd5e v4.x
+- Built for dnd5e v4.0.x
+  - If using dnd5e v4.1.x or higher; the system auto rolls attacks, healing, and damage activities. Enabling these in the module will result in double rolls.
 - This module makes an attempt to be as non-disruptive as possible, but it has not been tested with other modules for compatibility
 
 # Installation
