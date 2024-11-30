@@ -1,3 +1,5 @@
+![GitHub Downloads (all assets, latest release)](https://img.shields.io/github/downloads/crash1115/crash-rolls-5e/latest/total?style=flat-square)
+
 # 5e Quicker Rolls
 A module for Foundry VTT that gives you more fine control over what the roll flow looks like, without the need for a huge complex module that messes with a ton of things. Each user has the ability to adjust the settings for themselves.
 
