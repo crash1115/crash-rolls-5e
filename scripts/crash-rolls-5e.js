@@ -81,7 +81,7 @@ Hooks.on('dnd5e.preRollDamageV2', (rollConfig, dialogConfig, messageConfig) => {
 // ============ HANDLE AUTOMATIC ROLLS ============
 
 
-// ATTACKS
+// Auto Roll Damage (Attacks)
 Hooks.on('dnd5e.rollAttackV2', async (rollConfig, dialogConfig, messageConfig) =>{    
     const autoRollDamage = getSettingValue('autoRollDamageForAttacks');
     if((dialogConfig.subject.damage) && autoRollDamage){
@@ -93,36 +93,39 @@ Hooks.on('dnd5e.rollAttackV2', async (rollConfig, dialogConfig, messageConfig) =
 });
 
 // ACTIVITY FOLLOW-UPS
-Hooks.on('dnd5e.postUseActivity', async (activity, messageConfig, results) => {
-    if(!activity) return;
-    const lookup = {
-        'attack': {settingName: 'autoRollAttacks', functionName: 'rollAttack'},
-        'check':{},
-        'damage':{},
-        'enchant': {},
-        'heal': {settingName: 'autoRollDamage', functionName: 'rollDamage'},
-        'save' :{},
-        'summon': {},
-        'utility':{settingName: 'autoRollUtility', functionName: 'rollFormula'}
-    };
+Hooks.on('dnd5e.postUseActivity', (activity, config, results) => {
 
-    // Auto roll attacks/checks/etc
-    const settingName = lookup[activity.type]?.settingName;
-    if(settingName){
-        const autoRollItem = getSettingValue(settingName);
-        if(autoRollItem){
-            const functionName = lookup[activity.type]?.functionName;
-            if(functionName){
-                await activity[functionName]();
-            } 
+    // Auto Roll Attack Activities - OVERRIDES SYSTEM BEHAVIOR - BROKEN
+    if(activity.type === "attack"){
+        const autoRollAttacks = getSettingValue("autoRollAttacks");
+        if (!autoRollAttacks) return false;
+    }
+
+    // Auto Roll Damage (Damage Activities) - OVERRIDES SYSTEM BEHAVIOR - BROKEN
+    if(activity.type === "damage"){
+        const autoRollDamage = getSettingValue('autoRollDamageForDamage');
+        if (!autoRollDamage) return false;
+    }
+
+    // Auto Roll Damage (Save Activities)
+    if(activity.type === "save"){
+        const autoRollDamage = getSettingValue('autoRollDamageForSave');
+        if(activity.damage && autoRollDamage){
+            activity.rollDamage();
         }
     }
-        
-    // Auto roll non-attack damage
-    if(activity.type !="attack"){
-        const autoRollDamage = getSettingValue('autoRollDamage');
-        if((activity.damage) && autoRollDamage){
-            await activity.rollDamage();
+
+    // Auto Roll Healing (Healing Activities) - OVERRIDES SYSTEM BEHAVIOR
+    if(activity.type === "heal"){
+        const autoRollDamage = getSettingValue('autoRollDamageForHealing');
+        if (!autoRollDamage) return false;
+    }
+
+    // Auto Roll Utility Activities
+    if(activity.type === "utility"){
+        const autoRoll = getSettingValue('autoRollUtility');
+        if(autoRoll){
+            activity.rollFormula();
         }
     }
 });
