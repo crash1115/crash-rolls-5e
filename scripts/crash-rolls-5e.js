@@ -127,8 +127,8 @@ Hooks.on('dnd5e.postUseActivity', async (activity, messageConfig, results) => {
 // Adapted from from dnd5e d20-roll.mjs, version 4.0
 function useAltRoll(ev, skipDialog = false){
     // We alt roll when...
-    //  Adv/Disadv/FF Key is held and Skip Attack Dialogs is off, or
-    //  FF Key is not held and Skip Attack Dialogs is on.
+    //  Adv/Disadv/FF Key is held and Skip Dialogs is off, or
+    //  FF Key is not held and Skip Dialogs is on.
     let keys = {};
     if(skipDialog){
         keys = { normal: areKeysPressed(ev, "skipDialogNormal") };
