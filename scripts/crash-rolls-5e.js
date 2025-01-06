@@ -85,7 +85,10 @@ Hooks.on('dnd5e.preRollDamageV2', (rollConfig, dialogConfig, messageConfig) => {
 Hooks.on('dnd5e.rollAttackV2', async (rollConfig, dialogConfig, messageConfig) =>{    
     const autoRollDamage = getSettingValue('autoRollDamageForAttacks');
     if((dialogConfig.subject.damage) && autoRollDamage){
-        await dialogConfig.subject.rollDamage();
+        // TODO: Fix crit handling, currently not possible, should be fixed in v4.2.x
+        // Issue Ref: https://github.com/foundryvtt/dnd5e/issues/4571
+        const isCrit = rollConfig[0].isCritical;
+        await dialogConfig.subject.rollDamage({isCritical: isCrit});
     }
 });
 
