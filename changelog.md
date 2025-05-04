@@ -1,3 +1,7 @@
+## Version 0.5.0
+- Compatibility with dnd5e version 5.x
+- Resolved some KeyboardManager deprecation warnings in the console
+
 ## Version 0.4.0
 - Compatibility with dnd5e version 4.4.x
 - Renamed the "Auto Roll Utility Activities" setting to "Auto Roll Use Activities" to match the activity type's actual name

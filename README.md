@@ -31,7 +31,7 @@ This module makes an attempt to be as non-disruptive as possible, but it has not
 
 | System Version     | Latest Module Version                                                       |
 | ------------------ | --------------------------------------------------------------------------- |
-| v5.x.x             | Partial compatibility with v0.4.0. Auto roll settings work, skip dialog settings do not   |
+| v5.x.x             | [v0.5.0](https://github.com/crash1115/crash-rolls-5e/releases/tag/0.5.0)   |
 | v4.4.x             | [v0.4.0](https://github.com/crash1115/crash-rolls-5e/releases/tag/0.4.0)    |
 | v4.3.x             | [v0.3.0](https://github.com/crash1115/crash-rolls-5e/releases/tag/v0.3.0)   |
 | v4.2.x             | [v0.3.0](https://github.com/crash1115/crash-rolls-5e/releases/tag/v0.3.0)   |

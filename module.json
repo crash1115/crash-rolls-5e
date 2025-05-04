@@ -4,28 +4,31 @@
   "description": "Allows users to customize what types of rolls are done automatically, and/or skip dialogs.",
   "authors": [
     {
-      "name": "CRASH1115"
+      "name": "CRASH1115",
+      "flags": {}
     }
   ],
-  "version": "0.4.0",
+  "version": "0.5.0",
   "manifest": "https://github.com/crash1115/crash-rolls-5e/releases/latest/download/module.json",
-  "download": "https://github.com/crash1115/crash-rolls-5e/releases/download/0.4.0/crash-rolls-5e.zip",
+  "download": "https://github.com/crash1115/crash-rolls-5e/releases/download/0.5.0/module.zip",
   "compatibility": {
-    "minimum": 12,
-    "verified": 12
+    "minimum": "13",
+    "verified": "13"
   },
   "relationships": {
-    "systems": [{
-      "id": "dnd5e",
-      "type": "system",
-      "manifest": "https://raw.githubusercontent.com/foundryvtt/dnd5e/main/system.json",
-      "compatibility": {
-        "minimum": "4.4.0",
-        "verified": "4.4.1"
+    "systems": [
+      {
+        "id": "dnd5e",
+        "type": "system",
+        "manifest": "https://raw.githubusercontent.com/foundryvtt/dnd5e/main/system.json",
+        "compatibility": {
+          "minimum": "5.0.0",
+          "verified": "5.0.1"
+        }
       }
-    }]
+    ]
   },
   "esmodules": [
-    "./scripts/crash-rolls-5e.js"
+    "scripts/crash-rolls-5e.js"
   ]
 }

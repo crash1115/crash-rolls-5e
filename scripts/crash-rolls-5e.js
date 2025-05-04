@@ -146,17 +146,18 @@ function useAltRoll(ev, skipDialog = false){
     return Object.values(keys).some(k => k);
 }
 
-// Taken from dnd5e utils.mjs, version 4.0
+// Adapted from dnd5e utils.mjs, version 4.0
 function areKeysPressed(event, action) {
     if ( !event ) return false;
+    const kbm = foundry.helpers.interaction.KeyboardManager;
     const activeModifiers = {};
     const addModifiers = (key, pressed) => {
       activeModifiers[key] = pressed;
-      KeyboardManager.MODIFIER_CODES[key].forEach(n => activeModifiers[n] = pressed);
+      kbm.MODIFIER_CODES[key].forEach(n => activeModifiers[n] = pressed);
     };
-    addModifiers(KeyboardManager.MODIFIER_KEYS.CONTROL, event.ctrlKey || event.metaKey);
-    addModifiers(KeyboardManager.MODIFIER_KEYS.SHIFT, event.shiftKey);
-    addModifiers(KeyboardManager.MODIFIER_KEYS.ALT, event.altKey);
+    addModifiers(kbm.MODIFIER_KEYS.CONTROL, event.ctrlKey || event.metaKey);
+    addModifiers(kbm.MODIFIER_KEYS.SHIFT, event.shiftKey);
+    addModifiers(kbm.MODIFIER_KEYS.ALT, event.altKey);
     return game.keybindings.get("dnd5e", action).some(b => {
       if ( game.keyboard.downKeys.has(b.key) && b.modifiers.every(m => activeModifiers[m]) ) return true;
       if ( b.modifiers.length ) return false;
