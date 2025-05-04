@@ -49,8 +49,8 @@ export function registerSettings() {
     
 
     game.settings.register(MODULE_ID, 'autoRollUtility', {
-        name: "Auto Roll Utility Activities",
-        hint: "Automatically make rolls when using utility-type actions.",
+        name: "Auto Roll Use Activities",
+        hint: "Automatically make rolls when using Use-type actions.",
         scope: 'client',
         default: false,
         type: Boolean,

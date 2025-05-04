@@ -10,7 +10,7 @@ Automatically roll specific types of rolls based on user preference. Auto rolls 
 - Auto Roll Damage (Damage Activities)
 - Auto Roll Damage (Save Activities)
 - Auto Roll Healing (Healing Activities)
-- Auto Roll Utility Activities
+- Auto Roll Use Activities
 
 ## Skip Dialog Settings
 Set whether or not you want to skip dialogs for specific types of rolls by default.
@@ -31,6 +31,8 @@ This module makes an attempt to be as non-disruptive as possible, but it has not
 
 | System Version     | Latest Module Version                                                       |
 | ------------------ | --------------------------------------------------------------------------- |
+| v5.x.x             | Untested Compatibility    |
+| v4.4.x             | [v0.4.0](https://github.com/crash1115/crash-rolls-5e/releases/tag/0.4.0)    |
 | v4.1.2             | [v0.3.0](https://github.com/crash1115/crash-rolls-5e/releases/tag/v0.3.0)   |
 | v4.0.x             | [v0.2.2](https://github.com/crash1115/crash-rolls-5e/releases/tag/v0.2.2)   |
 

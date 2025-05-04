@@ -10,53 +10,53 @@ Hooks.on('init', () => {
 
 
 // ABILITY CHECKS
-Hooks.on('dnd5e.preRollAbilityTest', (actor, rollData, abilityId) => {
-    if(rollData.vanilla){ return; }
-    const event = window.event;
+Hooks.on('dnd5e.preRollAbilityCheckV2', (rollConfig, dialogConfig, messageConfig) => {
+    if(rollConfig.vanilla) return;
+    const event = rollConfig.event;
     const skipDialog = getSettingValue("skipAbilityDialogs");
     const altRoll = useAltRoll(event, skipDialog);
     const fastForward = skipDialog != altRoll;
-    rollData.fastForward  = fastForward;
+    dialogConfig.configure = !fastForward
 });
 
 // SAVING THROWS
-Hooks.on('dnd5e.preRollAbilitySave', (actor, rollData, abilityId) => {
-    if(rollData.vanilla){ return; }
-    const event = window.event;
+Hooks.on('dnd5e.preRollSavingThrowV2', (rollConfig, dialogConfig, messageConfig) => {
+    if(rollConfig.vanilla) return;
+    const event = rollConfig.event;
     const skipDialog = getSettingValue("skipSaveDialogs");
     const altRoll = useAltRoll(event, skipDialog);
     const fastForward = skipDialog != altRoll;
-    rollData.fastForward  = fastForward;
+    dialogConfig.configure = !fastForward
 });
 
 // DEATH SAVES
-Hooks.on('dnd5e.preRollDeathSave', (actor, rollData) => {
-    if(rollData.vanilla){ return; }
-    const event = window.event;
+Hooks.on('dnd5e.preRollDeathSaveV2', (rollConfig, dialogConfig, messageConfig) => {
+    if(rollConfig.vanilla) return;
+    const event = rollConfig.event;
     const skipDialog = getSettingValue("skipSaveDialogs");
     const altRoll = useAltRoll(event, skipDialog);
     const fastForward = skipDialog != altRoll;
-    rollData.fastForward  = fastForward;
+    dialogConfig.configure = !fastForward
 });
 
 // SKILL CHECKS
-Hooks.on('dnd5e.preRollSkill', (actor, rollData, skillId) => {
-    if(rollData.vanilla){ return; }
-    const event = window.event;
+Hooks.on('dnd5e.preRollSkillV2', (rollConfig, dialogConfig, messageConfig) => {
+    if(rollConfig.vanilla) return;
+    const event = rollConfig.event;
     const skipDialog = getSettingValue("skipSkillDialogs");
     const altRoll = useAltRoll(event, skipDialog);
     const fastForward = skipDialog != altRoll;
-    rollData.fastForward  = fastForward;
+    dialogConfig.configure = !fastForward
 });
 
 // TOOL CHECKS
-Hooks.on('dnd5e.preRollToolCheck', (actor, rollData, toolId) => {
-    if(rollData.vanilla){ return; }
-    const event = window.event;
+Hooks.on('dnd5e.preRollToolV2', (rollConfig, dialogConfig, messageConfig) => {
+    if(rollConfig.vanilla) return;
+    const event = rollConfig.event;
     const skipDialog = getSettingValue("skipToolDialogs");
     const altRoll = useAltRoll(event, skipDialog);
     const fastForward = skipDialog != altRoll;
-    rollData.fastForward  = fastForward;
+    dialogConfig.configure = !fastForward
 });
 
 // ATTACK ROLLS
@@ -85,8 +85,6 @@ Hooks.on('dnd5e.preRollDamageV2', (rollConfig, dialogConfig, messageConfig) => {
 Hooks.on('dnd5e.rollAttackV2', async (rollConfig, dialogConfig, messageConfig) =>{    
     const autoRollDamage = getSettingValue('autoRollDamageForAttacks');
     if((dialogConfig.subject.damage) && autoRollDamage){
-        // TODO: Fix crit handling, currently not possible, should be fixed in v4.2.x
-        // Issue Ref: https://github.com/foundryvtt/dnd5e/issues/4571
         const isCrit = rollConfig[0].isCritical;
         await dialogConfig.subject.rollDamage({isCritical: isCrit});
     }
@@ -95,13 +93,13 @@ Hooks.on('dnd5e.rollAttackV2', async (rollConfig, dialogConfig, messageConfig) =
 // ACTIVITY FOLLOW-UPS
 Hooks.on('dnd5e.postUseActivity', (activity, config, results) => {
 
-    // Auto Roll Attack Activities - OVERRIDES SYSTEM BEHAVIOR - BROKEN
+    // Auto Roll Attack Activities
     if(activity.type === "attack"){
         const autoRollAttacks = getSettingValue("autoRollAttacks");
         if (!autoRollAttacks) return false;
     }
 
-    // Auto Roll Damage (Damage Activities) - OVERRIDES SYSTEM BEHAVIOR - BROKEN
+    // Auto Roll Damage (Damage Activities)
     if(activity.type === "damage"){
         const autoRollDamage = getSettingValue('autoRollDamageForDamage');
         if (!autoRollDamage) return false;

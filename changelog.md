@@ -1,3 +1,9 @@
+## Version 0.4.0
+- Compatibility with dnd5e version 4.4.x
+- Renamed the "Auto Roll Utility Activities" setting to "Auto Roll Use Activities" to match the activity type's actual name
+- The Auto Roll Attack Activities and Auto Roll Damage Activities now properly override default system behavior based on your choice
+- Resolved some hook deprecation warnings in the console
+
 ## Version 0.3.0
 - Renamed "Auto Roll Attacks" setting to "Auto Roll Attack Activities"
 - Renamed "Auto Roll Other Formulae" setting to "Auto Roll Utility Activities"
